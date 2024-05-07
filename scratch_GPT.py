@@ -93,7 +93,7 @@ class MultiHeadAttention(nn.Module):
     """Multiple heads of self-attention in parallel"""
     def __init__(self, num_heads, head_size):
         super().__init__()
-        self.heads = nn.ModuleList([Head(head_size)] for _ in range(num_heads))
+        self.heads = nn.ModuleList([Head(head_size) for _ in range(num_heads)])
         self.proj = nn.Linear(n_embd, n_embd)
         self.dropout = nn.Dropout(dropout)
 
@@ -110,7 +110,7 @@ class FeedForward(nn.Module):
         super().__init__()
         self.net = nn.Sequential(
             nn.Linear(n_embd, 4* n_embd),
-            nn.ReLu(),
+            nn.ReLU(),
             nn.Linear(4*n_embd, n_embd),
             nn.Dropout(dropout),
         )
